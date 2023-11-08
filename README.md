@@ -34,3 +34,28 @@ Isso é semelhante a pressionar um botão que faz a nossa aplicação Java com S
 ```
 CMD ["java","-jar","/app/app.jar"]
 ```
+
+#Como iniciar a aplicação 
+
+Docker build: Este comando é usado para criar uma imagem Docker a partir de um Dockerfile e de todos os recursos necessários.
+
+-t nome: A opção -t permite que você atribua um nome à imagem que está sendo construída. Neste caso, "nome" é o nome que você está dando para a imagem. Você pode escolher qualquer nome que desejar, geralmente relacionado ao seu projeto ou aplicação.
+
+.: O ponto (.) no final do comando indica o contexto de construção. O contexto é o diretório no seu sistema de arquivos local onde o Docker procura o Dockerfile e quaisquer outros recursos que você deseja incluir na imagem. O ponto (.) significa que o Docker deve usar o diretório atual como contexto.
+
+Portanto, quando você executa esse comando, o Docker procura um Dockerfile no diretório atual, constrói uma imagem com base nesse Dockerfile e atribui o nome especificado (neste caso, "nome") a essa imagem. A imagem resultante estará pronta para ser usada para criar contêineres Docker que executem sua aplicação.
+
+```
+docker build -t nome .
+```
+# Rodando aplicação
+docker run: Este comando é usado para criar e executar um contêiner Docker a partir de uma imagem.
+
+-p porta:porta: A opção "-p" é usada para mapear portas entre o sistema operacional host e o contêiner. Portanto, você especifica a porta do sistema operacional host seguida pela porta no contêiner, separadas por dois pontos. Isso permite que o tráfego seja redirecionado da porta do sistema operacional host para a porta do contêiner. Por exemplo, se você usar "-p 8080:80", está mapeando a porta 8080 do sistema operacional host para a porta 80 do contêiner. Isso é útil para acessar serviços executados no contêiner a partir do host ou da rede externa.
+
+nomedaimagem: Substitua "nomedaimagem" pelo nome da imagem Docker que você deseja usar para criar o contêiner. O Docker criará um novo contêiner com base nessa imagem e o iniciará.
+
+Portanto, quando você executa esse comando, o Docker cria um novo contêiner com base na imagem especificada e configura a porta para redirecionar o tráfego da porta do sistema operacional host para a porta do contêiner. Isso permite que você acesse os serviços dentro do contêiner através da porta mapeada no sistema operacional host. Por exemplo, se você usar "-p 8080:80", poderá acessar os serviços do contêiner na porta 80 através da porta 8080 do sistema operacional host.
+```
+docker run -p 8080:8080 nomedaimagem 
+```
